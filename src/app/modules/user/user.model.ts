@@ -20,3 +20,5 @@ const userSchema = new Schema<IUser>({
     permanentAddress: { type: String, required: true }
 });
 const User = model<IUser>("User", userSchema);
+
+export default User;

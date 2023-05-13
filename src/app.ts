@@ -1,8 +1,10 @@
-import express, { Application, NextFunction, Request, Response } from 'express';
+import express, { Application } from 'express';
 import cors from 'cors';
-import { Schema, model } from 'mongoose';
 
 const app: Application = express();
+
+// Application routes
+import userRoutes from './app/modules/user/user.route'
 
 // using cors
 app.use(cors());
@@ -11,44 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-
-    // Inserting a test data in mongodb
-    /*
-        Step 1: Interface
-        Step 2: Schema
-        Step 3: Model
-        Step 4: Database Query
-    */
-    // res.send('Hello World!')
-    // next();
-
-
-
-
-    const createUserToDB = async () => {
-        const user = new User({
-            id: '787',
-            role: "student",
-            password: 'password2',
-            name: {
-                firstName: "Rubayat.",
-                middleName: "Jimti",
-                lastName: "Prathona",
-            },
-            dateOfBirth: "31-07-1992",
-            gender: "male",
-            email: "rajibrt@gmail.com",
-            contactNo: "01711380679",
-            emergencyContactNo: "01911834587",
-            presentAddress: "Dhaka",
-            permanentAddress: "Jessore",
-        });
-        await user.save();
-        console.log(user)
-    }
-    createUserToDB();
-})
+// app.get('/api/v1/user', userRoutes)
+app.use('/api/v1/user', userRoutes)
 
 
 export default app;
